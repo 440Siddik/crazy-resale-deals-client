@@ -9,6 +9,7 @@ const CategorySection = () => {
     queryFn: () => fetch("http://localhost:5000/categories")
     .then(res => res.json())
   });
+  
   return (
     <div className='my-20'>
       <h3 className="text-blue-400 font-bold text-4xl text-center my-6">
