@@ -5,7 +5,7 @@ const CategoryCard = ({ category }) => {
   const {_id, categoryName, img } = category;
   return (
     <div className="mx-auto">
-      <div className="w-full max-w-sm bg-amber-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 h-full border p-3">
+      <div className="w-full max-w-sm bg-amber-200 rounded-lg shadow-md h-full border p-3">
         <img
           className="p-8 rounded-t-lg h-[250px] border-b border-red-300"
           src={img}
@@ -13,10 +13,9 @@ const CategoryCard = ({ category }) => {
         />
 
         <div className="px-5 pb-5">
-          <h5 className="text-2xl text-center font-semibold tracking-tight text-gray-900 dark:text-white my-4">
+          <h5 className="text-2xl my-2 text-center font-semibold tracking-tight text-gray-900">
             {categoryName}
           </h5>
-
           <div className="flex items-center justify-between">
             <Link
               to={`/categories/${_id}`}

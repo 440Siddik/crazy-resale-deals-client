@@ -1,5 +1,7 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import BookingModal from './BookingModal/BookingModal'
+
 import ProductSectionCard from "./ProductSectionCard";
 
 const ProductsSection = () => {
@@ -18,6 +20,7 @@ const ProductsSection = () => {
         ></ProductSectionCard>
       ))}
       </div>
+   <BookingModal></BookingModal>
     </div>
   );
 };
