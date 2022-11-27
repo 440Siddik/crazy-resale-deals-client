@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 const ProductSectionCard = ({ categorywiseProduct }) => {
   const {
-    categoryName,
     productName,
     sellerName,
     used,
@@ -15,8 +14,8 @@ const ProductSectionCard = ({ categorywiseProduct }) => {
     verified,
   } = categorywiseProduct;
   return (
-    <div className="mx-auto px-8">
-      <div class="w-full max-w-sm bg-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 h-full">
+    <div className="mx-auto px-6">
+      <div class="w-full max-w-sm bg-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 h-full relative">
         <img
           class="p-8 rounded-t-lg h-[300px] w-full rounded-lg"
           src={img}
@@ -38,9 +37,7 @@ const ProductSectionCard = ({ categorywiseProduct }) => {
             <p class="text-base font-semibold text-white my-1">
               Original Price : {originalPrice}
             </p>
-            <p class="text-base font-semibold text-white my-1">
-              Used : {used}
-            </p>
+            <p class="text-base font-semibold text-white my-1">Used : {used}</p>
             <p class="text-base font-semibold text-white my-1">
               Posted : {posted}
             </p>
@@ -48,20 +45,29 @@ const ProductSectionCard = ({ categorywiseProduct }) => {
               Seller Name : {sellerName}
             </p>
             <div class="text-base font-semibold text-white flex items-center">
-              <span className="mr-2">
-                {verified === true ? "Verified Seller" : ""}
+              <span className="mr-3">
+                {verified === true ? (
+                  <p className="mb-10">Verified Seller</p>
+                ) : (
+                  <p className="mb-10"></p>
+                )}
               </span>
               <span>
                 {verified === true ? (
-                  <FaCheck className="bg-green-400 text-white rounded-xl font-bold text-2xl" />
+                  <FaCheck className="bg-green-400 mb-10 text-white rounded-xl font-bold text-2xl" />
                 ) : (
                   ""
                 )}
               </span>
             </div>
-            <label htmlFor="booking-modal" className="btn">
-              open modal
-            </label>
+            <>
+              <label
+                htmlFor="booking-modal"
+                className="btn btn-secondary my-4 absolute bottom-0"
+              >
+                Book Now
+              </label>
+            </>
           </div>
         </div>
       </div>
