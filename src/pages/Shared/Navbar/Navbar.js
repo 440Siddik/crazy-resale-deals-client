@@ -2,6 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.jpg'
 const Navbar = () => {
+  const menuItems = (
+    <>
+      <Link className="mr-4 font-semibold text-white" to="/home">
+        <li>Home</li>
+      </Link>
+      <Link className="mr-4 font-semibold text-white" to="/myorders">
+        <li>My Orders</li>
+      </Link>
+      <Link className="mr-4 font-semibold text-white" to="/blogs">
+        <li>Blogs</li>
+      </Link>
+    </>
+  );
+  
   return (
     <div className="navbar bg-accent">
       <div className="navbar-start">
@@ -26,18 +40,18 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            {/* menuitems  */}
+            {menuItems}
           </ul>
         </div>
-        <div className='flex'>
+        <div className="flex">
           <Link to="/" className="btn btn-ghost normal-case text-white text-xl">
             Crazy Resale Deals
           </Link>
-          <img src={logo} className='w-10 h-10' alt="" />
+          <img src={logo} className="w-10 h-10" alt="" />
         </div>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0">{/* menuitems */}</ul>
+      <div className="navbar-end hidden lg:flex">
+        <ul className="menu menu-horizontal">{menuItems}</ul>
       </div>
     </div>
   );

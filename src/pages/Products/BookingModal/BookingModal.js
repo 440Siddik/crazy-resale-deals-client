@@ -1,9 +1,9 @@
 import React from 'react';
 
-const BookingModal = () => {
+const BookingModal = ({products}) => {
+  const {productName, resalePrice} = products
   return (
     <>
-      {/* Put this part before </body> tag */}
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
@@ -13,13 +13,41 @@ const BookingModal = () => {
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">
-            Congratulations random Internet user!
-          </h3>
-          <p className="py-4">
-            You've been selected for a chance to get one year of subscription to
-            use Wikipedia for free!
-          </p>
+          <h3 className="text-lg font-bold my-3">{productName}</h3>
+          <form className="py-4 grid grid-cols-1 gap-3">
+            <input type="text" className="input input-bordered w-full" />
+            <input type="text" className="input input-bordered w-full" />
+            <p className="font-medium">Product Name</p>
+            <input
+              type="text"
+              value={productName}
+              disabled
+              className="input input-bordered w-full"
+            />
+            <p className="font-medium">Price</p>
+            <input
+              type="text"
+              value={resalePrice}
+              disabled
+              className="input input-bordered w-full"
+            />
+            <input
+              type="text"
+              placeholder="Your Phone"
+              className="input input-bordered w-full"
+            />
+            <input
+              type="text"
+              placeholder="Meeting Location"
+              className="input input-bordered w-full"
+            />
+            <br />
+            <input
+              className="w-full btn btn-accent"
+              type="submit"
+              value="Submit"
+            />
+          </form>
         </div>
       </div>
     </>

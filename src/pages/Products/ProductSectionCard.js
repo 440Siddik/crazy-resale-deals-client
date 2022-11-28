@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
-const ProductSectionCard = ({ categorywiseProduct }) => {
+const ProductSectionCard = ({ categorywiseProduct, setProducts }) => {
   const {
     productName,
     sellerName,
@@ -62,6 +62,7 @@ const ProductSectionCard = ({ categorywiseProduct }) => {
             </div>
             <>
               <label
+                onClick={() => setProducts(categorywiseProduct)}
                 htmlFor="booking-modal"
                 className="btn btn-secondary my-4 absolute bottom-0"
               >
