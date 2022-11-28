@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
 const { register, handleSubmit } = useForm();
-const [data, setData] = useState("");
 const handleLogin = (data) => {
 console.log(data);
 }
