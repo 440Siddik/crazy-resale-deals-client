@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
 
 const Signup = () => {
   const { register, handleSubmit } = useForm();
+ const {createUser, updateUser} = useContext(AuthContext)
+
   const handleSignup = (data) => {
-    console.log(data);
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        toast('User Created Successfully')
+        const userInfo = {
+          displayName : data.name
+        }
+        updateUser(userInfo)
+        .then(()=>{})
+        .catch(err => console.log(err))
+        console.log(user);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div className="h-[800px] flex justify-center items-center">
@@ -41,7 +57,6 @@ const Signup = () => {
               <div className="flex mr-6">
                 <p className="mr-2">Buyer</p>
                 <input
-                  defaultChecked
                   type="radio"
                   name="radio-5"
                   className="radio radio-success"

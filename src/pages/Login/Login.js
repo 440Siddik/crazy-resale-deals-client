@@ -1,12 +1,33 @@
-import React, { useState } from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
 
 const Login = () => {
 const { register, handleSubmit } = useForm();
+const { login, googleSignIn } = useContext(AuthContext);
+const provider = new GoogleAuthProvider()
+
 const handleLogin = (data) => {
 console.log(data);
+login(data.email, data.password)
+.then(result => {
+  const user = result.user
+  console.log(user);
+})
+.catch(err => console.log(err))
 }
+
+const handleGoogleLogin = provider => {
+  googleSignIn(provider)
+  .then(result => {
+    const user = result.user
+    console.log(user);
+  })
+.catch(err => console.log(err))
+}
+
   return (
     <div className="h-[800px] flex justify-center items-center">
       <div className="w-96 p-7 rounded border border-fuchsia-300">
@@ -43,7 +64,9 @@ console.log(data);
         <div className="flex flex-col w-full border-opacity-50">
           <div className="divider">OR</div>
         </div>
-        <button className="btn btn-outline w-full">Login With Google</button>
+        <button onClick={handleGoogleLogin} className="btn btn-outline w-full">
+          Login With Google
+        </button>
       </div>
     </div>
   );
