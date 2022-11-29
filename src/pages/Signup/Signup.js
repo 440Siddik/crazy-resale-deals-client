@@ -1,28 +1,47 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Signup = () => {
   const { register, handleSubmit } = useForm();
- const {createUser, updateUser} = useContext(AuthContext)
+  const { createUser, updateUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSignup = (data) => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        toast('User Created Successfully')
+        toast("User Created Successfully");
         const userInfo = {
-          displayName : data.name
+          displayName: data.name
         }
         updateUser(userInfo)
-        .then(()=>{})
-        .catch(err => console.log(err))
-        console.log(user);
+          .then(() => {
+            saveUser(data.name, data.email, data.selectrole);
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   };
+
+  const saveUser = (name, email) => {
+    const user = {name, email};
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        navigate("/");
+      });
+  };
+
   return (
     <div className="h-[800px] flex justify-center items-center">
       <div className="w-96 p-7 rounded border border-fuchsia-300">
@@ -53,25 +72,15 @@ const Signup = () => {
             />
           </div>
           <div className="form-control">
-            <div className="flex my-2">
-              <div className="flex mr-6">
-                <p className="mr-2">Buyer</p>
-                <input
-                  type="radio"
-                  name="radio-5"
-                  className="radio radio-success"
-                />
-              </div>
-              <div className="flex">
-                <p className="mr-2">Seller</p>
-                <input
-                  type="radio"
-                  name="radio-5"
-                  className="radio radio-success"
-                />
-              </div>
-            </div>
-
+            <select
+              {...register("selectrole")}
+              className="select select-bordered w-full"
+            >
+              <option>Buyer</option>
+              <option>Seller</option>
+            </select>
+          </div>
+          <div>
             <input
               className="btn btn-secondary w-full my-3"
               value="Sign up"
