@@ -21,8 +21,12 @@ const [products , setProducts] = useState('')
           ></ProductSectionCard>
         ))}
       </div>
-      {products &&
-        <BookingModal products={products}></BookingModal>}
+      {products && (
+        <BookingModal
+          products={products}
+          setProducts={setProducts}
+        ></BookingModal>
+      )}
     </div>
   );
 };
