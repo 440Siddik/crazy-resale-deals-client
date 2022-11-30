@@ -7,7 +7,7 @@ import Login from "../pages/Login/Login";
 import MyOrders from "../pages/MyOrders/MyOrders";
 import ProductsSection from "../pages/Products/ProductsSection";
 import Signup from "../pages/Signup/Signup";
-
+import AddProduct from '../pages/AddProduct/AddProduct'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/myorders",
         element: <MyOrders></MyOrders>,
+      },
+      {
+        path: "/addproduct",
+        element: <AddProduct></AddProduct>,
       },
       {
         path: "/categories/:id",

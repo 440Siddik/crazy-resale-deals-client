@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const Signup = () => {
@@ -13,21 +13,22 @@ const Signup = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
+        console.log(user);
         toast("User Created Successfully");
         const userInfo = {
           displayName: data.name
         }
         updateUser(userInfo)
           .then(() => {
-            saveUser(data.name, data.email, data.selectrole);
+            saveUser(data.email);
           })
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   };
 
-  const saveUser = (name, email) => {
-    const user = {name, email};
+  const saveUser = (email) => {
+    const user = {email};
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
@@ -38,7 +39,7 @@ const Signup = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        navigate("/");
+        navigate('/')
       });
   };
 
