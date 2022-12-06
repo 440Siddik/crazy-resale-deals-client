@@ -14,9 +14,6 @@ const Navbar = () => {
       <Link className="mr-4 font-semibold text-white" to="/home">
         <li>Home</li>
       </Link>
-      <Link className="mr-4 font-semibold text-white" to="/myorders">
-        <li>My Orders</li>
-      </Link>
       <Link className="mr-4 font-semibold text-white" to="/dashboard">
         <li>Dashboard</li>
       </Link>

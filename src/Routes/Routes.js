@@ -9,7 +9,11 @@ import ProductsSection from "../pages/Products/ProductsSection";
 import Signup from "../pages/Signup/Signup";
 import AddProduct from '../pages/AddProduct/AddProduct'
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import Dashboard from "../pages/Dashboard/Dashboard";
+import DashboardLayout from "../pages/DashboardLayout/DashboardLayout";
+import MyProducts from "../pages/MyProducts/MyProducts";
+import MyBuyers from "../pages/MyBuyers/MyBuyers";
+import SellerRoute from "./SellerRoute/SellerRoute";
+import BuyerRoute from "./BuyerRoute/BuyerRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,10 +45,6 @@ const router = createBrowserRouter([
         element: <MyOrders></MyOrders>,
       },
       {
-        path: "/addproduct",
-        element: <AddProduct></AddProduct>,
-      },
-      {
         path: "/categories/:id",
         loader: ({ params }) =>
           fetch(
@@ -60,8 +60,40 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: (
           <PrivateRoute>
-            <Dashboard></Dashboard>
+            <DashboardLayout></DashboardLayout>
           </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myproducts",
+        element: (
+          <SellerRoute>
+            <MyProducts></MyProducts>
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/addproduct",
+        element: (
+          <SellerRoute>
+            <AddProduct></AddProduct>,
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/mybuyers",
+        element: (
+          <SellerRoute>
+            <MyBuyers></MyBuyers>
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/myorders",
+        element: (
+          <BuyerRoute>
+            <MyOrders></MyOrders>
+          </BuyerRoute>
         ),
       },
     ],
