@@ -1,38 +1,52 @@
-import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext, useState } from 'react';
+import { GoogleAuthProvider } from "firebase/auth";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Context/AuthProvider';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
 
 const Login = () => {
-  const googleProvider = new GoogleAuthProvider()
+  const googleProvider = new GoogleAuthProvider();
   const { register, handleSubmit } = useForm();
   const { login, googleSignIn } = useContext(AuthContext);
 
-const location = useLocation()
-const navigate = useNavigate()
-const from = location.state?.from?.pathname || '/'
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
+  const handleLogin = (data) => {
+    console.log(data);
+    login(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => console.log(err));
+  };
 
-const handleLogin = (data) => {
-console.log(data);
-login(data.email, data.password)
-.then(result => {
-  const user = result.user
-  console.log(user);
-  navigate(from, {replace:true})
-})
-.catch(err => console.log(err))
-}
+  const handleGoogleLogin = () => {
+    googleSignIn(googleProvider)
+      .then((result) => {
+        console.log(result);
+        const email = result.user.email;
+        saveUserAsBuyer(email)
+      })
+      .catch((err) => console.log(err));
 
-const handleGoogleLogin = () => {
-  googleSignIn(googleProvider)
-    .then((result) => {
-      const user = result.user;
-      console.log(user);
-    })
-    .catch((err) => console.log(err));
-};
+      const saveUserAsBuyer = (email) => {
+        fetch(`http://localhost:5000/googleloginbuyer?email=${email}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => console.log(err)); 
+      }
+  };
 
   return (
     <div className="h-[800px] flex justify-center items-center">

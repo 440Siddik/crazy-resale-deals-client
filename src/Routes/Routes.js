@@ -8,6 +8,8 @@ import MyOrders from "../pages/MyOrders/MyOrders";
 import ProductsSection from "../pages/Products/ProductsSection";
 import Signup from "../pages/Signup/Signup";
 import AddProduct from '../pages/AddProduct/AddProduct'
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Dashboard from "../pages/Dashboard/Dashboard";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -45,8 +47,22 @@ const router = createBrowserRouter([
       {
         path: "/categories/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/categories/${params.id}`),
-        element: <ProductsSection></ProductsSection>,
+          fetch(
+            `https://crazy-resale-deals-server.vercel.app/categories/${params.id}`
+          ),
+        element: (
+          <PrivateRoute>
+            <ProductsSection></ProductsSection>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <PrivateRoute>
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+        ),
       },
     ],
   },

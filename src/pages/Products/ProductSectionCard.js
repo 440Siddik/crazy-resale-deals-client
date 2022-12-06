@@ -15,36 +15,36 @@ const ProductSectionCard = ({ categorywiseProduct, setProducts }) => {
   } = categorywiseProduct;
   return (
     <div className="mx-auto px-6">
-      <div class="w-full max-w-sm bg-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 h-full relative">
+      <div className="w-full max-w-sm bg-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 h-full relative">
         <img
-          class="p-8 rounded-t-lg h-[300px] w-full rounded-lg"
+          className="p-8 rounded-t-lg h-[300px] w-full rounded-lg"
           src={img}
           alt="product image"
         />
 
-        <div class="px-5 pb-5">
-          <h5 class="text-xl font-bold tracking-tight text-amber-200">
+        <div className="px-5 pb-5">
+          <h5 className="text-xl font-bold tracking-tight text-amber-200">
             {productName}
           </h5>
 
-          <div class="mt-2.5 mb-5">
-            <p class="text-base font-semibold text-white my-1">
+          <div className="mt-2.5 mb-5">
+            <p className="text-base font-semibold text-white my-1">
               Location : {location}
             </p>
-            <p class="text-base font-semibold text-white my-1">
+            <p className="text-base font-semibold text-white my-1">
               Resale Price : {resalePrice}
             </p>
-            <p class="text-base font-semibold text-white my-1">
+            <p className="text-base font-semibold text-white my-1">
               Original Price : {originalPrice}
             </p>
-            <p class="text-base font-semibold text-white my-1">Used : {used}</p>
-            <p class="text-base font-semibold text-white my-1">
+            <p className="text-base font-semibold text-white my-1">Used : {used}</p>
+            <p className="text-base font-semibold text-white my-1">
               Posted : {posted}
             </p>
-            <p class="text-base font-semibold text-white my-1">
+            <p className="text-base font-semibold text-white my-1">
               Seller Name : {sellerName}
             </p>
-            <div class="text-base font-semibold text-white flex items-center">
+            <div className="text-base font-semibold text-white flex items-center">
               <span className="mr-3">
                 {verified === true ? (
                   <p className="mb-10">Verified Seller</p>

@@ -18,7 +18,7 @@ const BookingModal = ({ products, setProducts }) => {
       phone,
       location,
     };
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://crazy-resale-deals-server.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -17,6 +17,9 @@ const Navbar = () => {
       <Link className="mr-4 font-semibold text-white" to="/myorders">
         <li>My Orders</li>
       </Link>
+      <Link className="mr-4 font-semibold text-white" to="/dashboard">
+        <li>Dashboard</li>
+      </Link>
       <Link className="mr-4 font-semibold text-white" to="/blogs">
         <li>Blogs</li>
       </Link>
@@ -62,14 +65,14 @@ const Navbar = () => {
             {menuItems}
           </ul>
         </div>
-        <div className="flex">
+        <div className="flex items-center">
           <Link to="/" className="btn btn-ghost normal-case text-white text-xl">
             Crazy Resale Deals
           </Link>
           <img src={logo} className="w-10 h-10" alt="" />
         </div>
       </div>
-      <div className="navbar-end hidden lg:flex">
+      <div className="navbar-end hidden lg:flex items-center">
         <ul className="menu menu-horizontal">{menuItems}</ul>
       </div>
     </div>

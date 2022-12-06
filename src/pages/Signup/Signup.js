@@ -10,37 +10,49 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleSignup = (data) => {
+    const email = data.email;
+    const role = data.selectrole;
+    console.log(role);
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
         toast("User Created Successfully");
         const userInfo = {
-          displayName: data.name
-        }
+          displayName: data.name,
+        };
         updateUser(userInfo)
-          .then(() => {
-            saveUser(data.email);
-          })
+          .then(() => {})
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
-  };
 
-  const saveUser = (email) => {
-    const user = {email};
-    fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        navigate('/')
-      });
+    if (role == "Seller") {
+      fetch(`http://localhost:5000/seller?email=${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => console.log(err));
+    }
+    if (role == "Buyer") {
+      fetch(`http://localhost:5000/buyer?email=${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -77,8 +89,10 @@ const Signup = () => {
               {...register("selectrole")}
               className="select select-bordered w-full"
             >
-              <option>Buyer</option>
-              <option>Seller</option>
+              <option value="Buyer" defaultChecked>
+                Buyer
+              </option>
+              <option value="Seller">Seller</option>
             </select>
           </div>
           <div>
